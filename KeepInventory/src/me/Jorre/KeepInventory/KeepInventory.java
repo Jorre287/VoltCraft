@@ -9,10 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,7 +23,7 @@ import net.md_5.bungee.api.ChatColor;
 public class KeepInventory extends JavaPlugin implements CommandExecutor, Listener {
 	
 	public static KeepInventory plugin;
-	String VTprefix ="&c&lVoltcraft &8>>";
+	String VTprefix = ChatColor.RED + "" + ChatColor.BOLD +"Voltcraft" + ChatColor.DARK_GRAY + ">>";
 	
 	private final boolean hasMethod = hasMethod("setKeepInventory");
 	
@@ -86,7 +86,7 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		}
 	}
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		String Kinv = plugin.getConfig().getString("Users." + player.getUniqueId() + ".KeepInventory");
@@ -95,19 +95,25 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 //
 		if (Kinv == ("On"))  {
 //		
-		player.sendMessage(ChatColor.BLUE + "Test");
+//		player.sendMessage(ChatColor.BLUE + "Test");
 		PermissionAttachment pperms = playerPermissions.get(player.getUniqueId());
 		pperms.setPermission("keepinventory.keep", true);
 		pperms.setPermission("keepinventory.keepxp", true);
+		player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is enabled!");
+
 		}else {
-			player.sendMessage(ChatColor.RED + "test");
-		
+			player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is disabled!");
 		}
+//		else {
+//			player.sendMessage(ChatColor.RED + "test");
 //		
-		if (player.hasPermission("keepinventory.keep") == true) {
-			player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is enabled!");
-		}else { player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is disabled!");
-		} 
+//		}
+//		
+//		if (player.hasPermission("keepinventory.keep") == true) {
+//			
+//			player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is enabled!");
+//		}else { player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is disabled!");
+//		} 
 		
 	}
 	
@@ -145,7 +151,7 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		
 		if (cmd.getName().equalsIgnoreCase(cmd1)){
 			if (!player.hasPermission("keepinventory.keep") == true) {
-			player.sendMessage("&c&lVoltcraft &8>> &7You have &aEnabled &7KeepInventory");
+			player.sendMessage(VTprefix + ChatColor.WHITE +"You have " + ChatColor.GREEN +"Enabled " + ChatColor.WHITE +"KeepInventory");
 			pperms.setPermission("keepinventory.keep", true);
 			pperms.setPermission("keepinventory.keepxp", true);
 			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
@@ -154,11 +160,11 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			
 			
 		}else {
-			player.sendMessage("&c&lVoltcraft &8>> &7You need to &4relog &7to &4disable &7KeepInventory");
+			player.sendMessage(VTprefix + ChatColor.WHITE +"You have to relog to " + ChatColor.RED +"Disable " + ChatColor.WHITE +"KeepInventory");
 			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory", "Off");
 			saveConfig();
 //			pperms.unsetPermission("keepinventory.keep");
-			//			pperms.unsetPermission("keepinventory.keepxp");
+//			pperms.unsetPermission("keepinventory.keepxp");
 		return true;
 	}
 		return true;}else if (cmd.getName().equalsIgnoreCase(cmd3)) {
