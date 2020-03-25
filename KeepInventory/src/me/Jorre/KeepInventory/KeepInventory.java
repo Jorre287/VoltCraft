@@ -14,7 +14,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -102,8 +101,7 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		pperms.setPermission("keepinventory.keepxp", true);
 		}else {
 			player.sendMessage(ChatColor.RED + "test");
-			attachment.unsetPermission("keepinventory.keep");
-			attachment.unsetPermission("keepinventory.keepxp");
+		
 		}
 //		
 		if (player.hasPermission("keepinventory.keep") == true) {
@@ -154,8 +152,8 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			
 		}else {
 			player.sendMessage("&c&lVoltcraft &8>> &7You need to &4relog &7to &4disable &7KeepInventory");
-			playerPermissions.unsetPermission("keepinventory.keep");
-			attachment.unsetPermission("keepinventory.keepxp");
+			pperms.unsetPermission("keepinventory.keep");
+			pperms.unsetPermission("keepinventory.keepxp");
 		return true;
 	}
 		return true;}else if (cmd.getName().equalsIgnoreCase(cmd3)) {
