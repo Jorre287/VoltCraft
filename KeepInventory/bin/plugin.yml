@@ -1,0 +1,13 @@
+name: KeepInventory
+author: Jorre
+version: 1.0
+main: me.Jorre.KeepInventory.KeepInventory
+description: toggles KeepInventory.
+commands:
+    KeepInventory:
+        description: KeepInventory.
+        usage: /<command>
+        aliases: [ki]
+    Discord:
+        usage: /<command>
+        description: Shows the discord link for Voltrox server.
