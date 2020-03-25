@@ -112,21 +112,21 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 	}
 	
 	
-	@EventHandler
-	public void onQuit(PlayerQuitEvent event) {
-		Player player = event.getPlayer();
-		if (player.hasPermission("keepinventory.keep") == true) {
-			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
-			
-		}
+//	@EventHandler
+//	public void onQuit(PlayerQuitEvent event) {
+//		Player player = event.getPlayer();
+//		if (player.hasPermission("keepinventory.keep") == true) {
+//			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
+//			
+//		}
 //		else {
 //			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory", "Off");
 //		}
-		
-		
-		saveConfig();
-		
-	}
+//		
+//		
+//		saveConfig();
+//		
+//	}
 	
 
 	public HashMap<UUID, PermissionAttachment> playerPermissions = new HashMap<UUID, PermissionAttachment>();
@@ -148,6 +148,8 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			player.sendMessage("&c&lVoltcraft &8>> &7You have &aEnabled &7KeepInventory");
 			pperms.setPermission("keepinventory.keep", true);
 			pperms.setPermission("keepinventory.keepxp", true);
+			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
+			saveConfig();
 			
 			
 			
