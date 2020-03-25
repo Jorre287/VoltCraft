@@ -118,9 +118,10 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		if (player.hasPermission("keepinventory.keep") == true) {
 			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
 			
-		}else {
-			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory", "Off");
 		}
+//		else {
+//			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory", "Off");
+//		}
 		
 		
 		saveConfig();
@@ -152,8 +153,10 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			
 		}else {
 			player.sendMessage("&c&lVoltcraft &8>> &7You need to &4relog &7to &4disable &7KeepInventory");
-			pperms.unsetPermission("keepinventory.keep");
-			pperms.unsetPermission("keepinventory.keepxp");
+			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory", "Off");
+			saveConfig();
+//			pperms.unsetPermission("keepinventory.keep");
+			//			pperms.unsetPermission("keepinventory.keepxp");
 		return true;
 	}
 		return true;}else if (cmd.getName().equalsIgnoreCase(cmd3)) {
