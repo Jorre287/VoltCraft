@@ -1,4 +1,5 @@
 package me.Jorre.KeepInventory;
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.UUID;
@@ -16,6 +17,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.github.aasmus.pvptoggle.PvPToggle;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -148,8 +151,11 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		PermissionAttachment pperms = playerPermissions.get(player.getUniqueId());
 		PermissionAttachment attachment = player.addAttachment(this);
 		playerPermissions.put(player.getUniqueId(), attachment);
-		
-		if (cmd.getName().equalsIgnoreCase(cmd1)){
+		File pvpfile = new File("plugins/PvPToggle/config.yml");
+		if (!pvpfile.exists()) {
+			return false;
+		}
+		if (cmd.getName().equalsIgnoreCase(cmd1) && PvPToggle.instance.players.get(player.getUniqueId()) == true){
 			if (!player.hasPermission("keepinventory.keep") == true) {
 			player.sendMessage(VTprefix + ChatColor.WHITE +"You have " + ChatColor.GREEN +"Enabled " + ChatColor.WHITE +"KeepInventory");
 			pperms.setPermission("keepinventory.keep", true);
@@ -157,7 +163,8 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
 			saveConfig();
 			
-			
+				
+					
 			
 		}else {
 			player.sendMessage(VTprefix + ChatColor.WHITE +"You have to relog to " + ChatColor.RED +"Disable " + ChatColor.WHITE +"KeepInventory");
@@ -167,7 +174,13 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 //			pperms.unsetPermission("keepinventory.keepxp");
 		return true;
 	}
-		return true;}else if (cmd.getName().equalsIgnoreCase(cmd3)) {
+		return true;}
+		else if (cmd.getName().equalsIgnoreCase(cmd1) && !PvPToggle.instance.players.get(player.getUniqueId()) == true){
+			player.sendMessage(VTprefix + ChatColor.GRAY + "You need to " + ChatColor.RED + "disable PvP " + ChatColor.GRAY + "to enable KeepInventory!");
+		
+		return true;
+		}
+		else if (cmd.getName().equalsIgnoreCase(cmd3)) {
 			player.sendMessage(VTprefix + ChatColor.AQUA + "https://discord.gg/8h24t6p");
 
 		return true;}
