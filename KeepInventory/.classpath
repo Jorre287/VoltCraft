@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/joren/Desktop/Testing/Spigot/spigot-1.15.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/joren/Desktop/Testing/Spigot/plugins/PvPToggle.jar"/>
+	<classpathentry kind="lib" path="C:/Users/joren/Desktop/Testing/Spigot/plugins/PlaceholderAPI-2.10.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -31,6 +31,9 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 	private final boolean hasMethod = hasMethod("setKeepInventory");
 	
 	public void onEnable() {
+		if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI")!= null) {
+			new KeepInventoryAPI(this).register();
+		}
 		Bukkit.getPluginManager().registerEvents(this, this);
 		plugin = this;
 		this.getConfig().options().copyDefaults();
@@ -103,9 +106,13 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 		pperms.setPermission("keepinventory.keep", true);
 		pperms.setPermission("keepinventory.keepxp", true);
 		player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is enabled!");
+		plugin.getConfig().set("rUsers." + player.getUniqueId() + ".state" , "On");
+
 
 		}else {
 			player.sendMessage(VTprefix + ChatColor.GOLD + "Keepinventory is disabled!");
+			plugin.getConfig().set("rUsers." + player.getUniqueId() + ".state" , "Off");
+
 		}
 //		else {
 //			player.sendMessage(ChatColor.RED + "test");
@@ -161,6 +168,8 @@ public class KeepInventory extends JavaPlugin implements CommandExecutor, Listen
 			pperms.setPermission("keepinventory.keep", true);
 			pperms.setPermission("keepinventory.keepxp", true);
 			plugin.getConfig().set("Users." + player.getUniqueId() + ".KeepInventory" , "On");
+			plugin.getConfig().set("rUsers." + player.getUniqueId() + ".state" , "On");
+			
 			saveConfig();
 			
 				
